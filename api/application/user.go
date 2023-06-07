@@ -6,7 +6,7 @@ import (
 )
 
 type IUserApplication interface {
-	GetUsers(ctx context.Context) (*user.User, error)
+	GetUsers(ctx context.Context) (user.Users, error)
 }
 
 type userApplication struct {
@@ -19,10 +19,10 @@ func NewUser(userRepo user.IRepository) IUserApplication {
 	}
 }
 
-func (u *userApplication) GetUsers(ctx context.Context) (*user.User, error) {
-	usr, err := u.userRepo.FindAll(ctx)
+func (u *userApplication) GetUsers(ctx context.Context) (user.Users, error) {
+	users, err := u.userRepo.FindAll(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return usr, nil
+	return users, nil
 }

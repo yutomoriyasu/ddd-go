@@ -11,7 +11,7 @@ func NewUserRepository() user.IRepository {
 	return &userRepository{}
 }
 
-func (u *userRepository) FindAll(ctx context.Context) (*user.User, error) {
+func (u *userRepository) FindAll(ctx context.Context) (user.Users, error) {
 	id := user.NewID(1)
 	email, err := user.NewEmail("test@example.com")
 	if err != nil {
@@ -22,5 +22,5 @@ func (u *userRepository) FindAll(ctx context.Context) (*user.User, error) {
 		return nil, err
 	}
 	usr := user.NewUser(id, email, name)
-	return usr, nil
+	return user.Users{usr}, nil
 }
