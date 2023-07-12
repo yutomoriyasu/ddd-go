@@ -16,12 +16,12 @@ services:
       - ddd-go-network
   
   db:
-    image: postgres:11.9
+    image: postgres:11
     restart: always
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ddd-go
     ports:
       - 5432:5432
     volumes:
@@ -32,4 +32,3 @@ services:
 networks:
   ddd-go-network:
     driver: bridge
-

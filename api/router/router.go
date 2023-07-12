@@ -3,7 +3,7 @@ package router
 import (
 	"ddd-go/application"
 	"ddd-go/controller"
-	"ddd-go/repository"
+	"ddd-go/infrastructure/postgres"
 
 	"github.com/labstack/echo/v4"
 )
@@ -12,10 +12,10 @@ type Router struct {
 	e *echo.Echo
 }
 
-func NewRouter(e *echo.Echo) *Router {
+func NewRouter(e *echo.Echo, db postgres.DB) *Router {
 	e.GET("/", hello)
 
-	ur := repository.NewUserRepository()
+	ur := postgres.NewUserRepository()
 	ua := application.NewUser(ur)
 	uc := controller.NewUserController(ua)
 	e.GET("/users", uc.GetUsers)
